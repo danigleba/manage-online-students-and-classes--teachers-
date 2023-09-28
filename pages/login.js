@@ -13,11 +13,22 @@ export default function Home() {
   const handleGoogleSignIn = async () => {
     try {
         const result = await signInWithPopup(auth, googleProvider)
-        router.push("/")
+        const url = "/api/auth/signup?profile_url=" + auth.currentUser.photoURL + "&email=" + auth.currentUser.email + "&username=" + auth.currentUser.displayName
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        const data = await response.json()
+        if (data.tutorCreated == true) {
+            router.push("/")
+        }
+        // User signed in successfully using Google
       } catch (error) {
             console.error("Google login error:", error);
       }    
-}
+  }
   return (
     <main className='mx-6'>
       <div className="flex-1 flex flex-col items-center pt-2">
