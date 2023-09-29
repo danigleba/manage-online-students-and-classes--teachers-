@@ -25,7 +25,7 @@ export default async function (req, res) {
                     email: email,
                     username: username,
                     profile_url: profile_url,
-                    prices: [],
+                    prices: {},
                     phone_number: "",
                     students: [],
                     vc_platform: "",

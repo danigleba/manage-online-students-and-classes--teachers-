@@ -20,9 +20,9 @@ export default async function (req, res) {
             const updatePromise = updateDoc(doc.ref, {
                 phone_number: phoneNumber,
                 prices: {
-                    "1_class": parseInt(price1),
-                    "10_classes": parseInt(price10),
-                    "25_classes": parseInt(price25)
+                    "one_class": parseInt(price1),
+                    "ten_classes": parseInt(price10),
+                    "twenty_classes": parseInt(price25)
                 },
                 vc_platform: vc_platform,
                 registered: true
