@@ -79,7 +79,7 @@ export default function Home() {
           <p className='font-bold text-xl pt-12'>Documentos</p>   
           <FileUpload student_email={student?.email} tutor_email={user?.email} />
           {studentFiles.map((item) => (
-            <a href={item.downloadUrl} key={item.id}>
+            <a target="_blank" href={item.downloadUrl} key={item.id}>
               <div className='w-full bg-white shadow-[0_0px_50px_rgb(0,0,0,0.08)] rounded-xl p-6'>
                 {item.name}
               </div>
