@@ -1,10 +1,12 @@
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
-import Next_classes from '@/components/Next_classes'
+import NextClasses from '@/components/NextClasses'
+import Students from '@/components/Students'
 import { useRouter } from 'next/router'
 import { useState, useEffect} from 'react'
 import { auth } from '@/utils/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +28,8 @@ export default function Home() {
   return (
     <main className='mx-6'>
       <Header user={user} />
-      <Next_classes/>
+      <NextClasses user={user}/>
+      <Students user={user} />
     </main>
   )
 }

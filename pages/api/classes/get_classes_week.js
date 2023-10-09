@@ -4,16 +4,24 @@ import { collection, getDocs, query, where, orderBy} from "firebase/firestore"
 export default async function handler(req, res) {
     const tutor_email = req.query.tutor_email
 
+    const currentDate = new Date()
+    const startDate = new Date(currentDate)
+    startDate.setHours(0, 0, 0, 0)
+    const endDate = new Date(currentDate)
+    endDate.setDate(endDate.getDate() + (7 - currentDate.getDay()))
+
     const classesRef = collection(db, "classes")
     const classesSnap = query(classesRef, where("tutor", "==", tutor_email), orderBy("day", "asc"), orderBy("start_time", "asc"))
     const queryClassesSnap = await getDocs(classesSnap)
     try {
         const docs = []
         queryClassesSnap.forEach((doc) => {
+            if (doc.data().day >= startDate.toISOString().split('T')[0] && doc.data().day <= endDate.toISOString().split('T')[0]) {
                 docs.push({
                     id: doc.id,
                     ...doc.data(),
                 })
+            }
         })
         res.status(200).json({ data: docs })
     } catch (error) {

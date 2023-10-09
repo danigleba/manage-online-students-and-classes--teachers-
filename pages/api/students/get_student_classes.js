@@ -2,10 +2,10 @@ import { db } from '@/utils/firebase'
 import { collection, getDocs, query, where, orderBy} from "firebase/firestore"
 
 export default async function handler(req, res) {
-    const tutor_email = req.query.tutor_email
+    const student_email = req.query.student_email
 
     const classesRef = collection(db, "classes")
-    const classesSnap = query(classesRef, where("tutor", "==", tutor_email), orderBy("day", "asc"), orderBy("start_time", "asc"))
+    const classesSnap = query(classesRef, where("student", "==", student_email), orderBy("day", "asc"), orderBy("start_time", "asc"))
     const queryClassesSnap = await getDocs(classesSnap)
     try {
         const docs = []

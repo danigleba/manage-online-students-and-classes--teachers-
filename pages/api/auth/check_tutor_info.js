@@ -13,6 +13,7 @@ export default async function (req, res) {
             if (doc.data().registered != true) {
                 res.status(200).json({ tutorRegistered: false })
             }
+            res.status(200).json({ tutorRegistered: true })
         })
     } catch (error) {
         console.error(error)
