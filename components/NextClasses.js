@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { FiArrowRight } from 'react-icons/fi'
-import { FiArrowLeft } from 'react-icons/fi'
+import { BiSolidLeftArrow } from 'react-icons/bi'
+import { BiSolidRightArrow } from 'react-icons/bi'
+import { TiDelete } from 'react-icons/ti'
+
 import { useRouter } from 'next/router'
 
 export default function NextClasses(props) {
@@ -57,7 +59,6 @@ export default function NextClasses(props) {
       setIsOpen(true)
     }
   }, [deleteId])
-
   const cancellClass = async () => {
     const url = "/api/classes/delete_class?class_id=" + deleteId
         const response = await fetch(url, {
@@ -72,72 +73,69 @@ export default function NextClasses(props) {
         }
   }
   return (
-    <main className="pt-8 overflow-hidden">
-      <h2 className='px-8'>Tus clases de hoy</h2>
-      <div className="flex w-screen items-center">
-        <div className={`px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full transform transition-transform duration-300 ease-in-out -translate-x-${slide * (100 / nSlide)}%`}>
+    <main className="pt-6 mx-6">
+      <h2 className='mb-6'>Clases del día</h2>
+      <div className="flex items-center w-full">
+        <div className={`w-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full`}>
           {visibleClasses.map((item) => (
             <a key={item.id}>
-              <div className='w-full bg-white shadow-[0_0px_50px_rgb(0,0,0,0.08)] rounded-xl p-6'>
-                <div className="flex justify-between pb-8">
+              <div className='w-full bg-white duration-200 shadow-[0_3px_10px_rgb(0,0,0,0.15)] rounded-xl p-6'>
+                <div className="flex justify-between pb-6">
                   <div className="flex gap-4">
-                    <Image className='rounded-full' alt="Student's profile picture" height={50} width={50} src={item?.profile_url} />
+                    <Image className='rounded-full' alt="Student's profile picture" height={50} width={50} src={item?.student_profile} />
                     <div>
                       <p className="font-bold">{item?.day.substr(-2)} de {months[parseInt(item?.day.slice(5, 7)) - 1]}, {item?.start_time} h</p>
                       <p className="font-light">Con {item.tutor_name}</p>
                     </div>
                   </div>
                 </div>
-                <div className='flex flex-col gap-4'>
-                  <button className='bg-black font-medium text-white py-2 rounded-md hover:bg-[#f4f4f4] hover:text-black duration-200'>Empezar clase</button>
-                  <button onClick={() => setDeleteID(item.id)} className='border-2 border-red-400 font-medium text-red-400 py-1.5 rounded-md hover:bg-red-400 hover:text-white duration-200'>Cancelar clase</button>
+                <div className='flex flex-col justify-center gap-4'>
+                  <div>
+                    <button className='w-full bg-[#6156f6] font-semibold text-white py-2 rounded-md hover:bg-[#5047c9] duration-200'>Empezar clase</button>
+                  </div>
+                  <div className='flex justify-center'>
+                    <button onClick={() => setDeleteID(item.id)} className='hover:bg-red-400 duration-200 bg-[#252422] font-normal text-red-400 py-1.5 items-center  gap-1.5 rounded-md w-max px-4 text-white duration-200 text-sm flex justify-center'>
+                      <TiDelete stroke-width="0" color="white" size={20} />
+                      <p>Cancelar clase</p>
+                    </button>
+                  </div>
                 </div>
               </div>
             </a>
           ))}
         </div>
         </div>
-        <div className='flex justify-center items-center'>
-            <div className="flex hover:scale-105 duration-200 rounded-full p-2">
-            <button onClick={handlePrevSlide} disabled={slide === 0}><FiArrowLeft /></button>
-            </div>
-            <div className="flex justify-center mt-4">
-                {classes.map((item, index) => (
-                    <div
-                        key={item.id}
-                        className={`h-3 w-3 mx-1 rounded-full ${index >= slide && index < slide + nSlide ? 'bg-black' : 'bg-gray-400'}`}
-                    ></div>
-                ))}
-            </div>
-            <div className="flex hover:scale-105 duration-200 rounded-full p-2">
-            <button onClick={handleNextSlide} disabled={slide === classes.length - nSlide}><FiArrowRight /></button>
-            </div>
+        {classes.length > nSlide ? (
+          <div className='pt-6 flex gap-4 justify-center items-center'>
+          <button onClick={handlePrevSlide} disabled={slide === 0} className={`${slide === 0 ? "bg-gray-100" : "bg-white shadow-[0_3px_10px_rgb(0,0,0,0.15)]" } flex items-center rounded-full p-3 rounded-md`}>
+            <BiSolidLeftArrow color="#252422" size={20}/>
+          </button>
+          <div className="flex justify-center">
+              {classes.map((item, index) => (
+                  <div
+                      key={item.id}
+                      className={`h-2.5 w-2.5 mx-1 rounded-full ${index >= slide && index < slide + nSlide ? 'bg-[#6156f6]' : 'bg-gray-300'}`}
+                  ></div>
+              ))}
+          </div>
+          <button onClick={handleNextSlide} disabled={slide === classes.length - nSlide} className={`${slide === classes.length - nSlide ? "bg-gray-100" : "bg-white shadow-[0_3px_10px_rgb(0,0,0,0.15)]" } flex items-center rounded-full p-3 rounded-md `}>
+            <BiSolidRightArrow color="#252422" size={20}/>
+          </button>
         </div>
+        ) : (<></>)}
         {/*Delete class confirmation modal*/}
         <div className={`fixed inset-0 flex items-center justify-center z-50 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300`}>
           <div className="modal-overlay absolute inset-0 bg-gray-800 opacity-50" />
-          <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-            <div className="modal-content py-4 text-left px-6">
-              <div className="flex justify-between items-center pb-3">
-                <p className="text-2xl font-bold">Modal Title</p>
-                <button
-                  onClick={() => setDeleteID("")}
-                  className="modal-close px-3 py-1 rounded-full cursor-pointer hover:bg-gray-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="currentColor">
-                    <path
-                      fillRule="evenodd"
-                      d="M4.293 4.293a1 1 0 011.414 0L9 7.586l3.293-3.293a1 1 0 111.414 1.414L10.414 9l3.293 3.293a1 1 0 11-1.414 1.414L9 10.414l-3.293 3.293a1 1 0 01-1.414-1.414L7.586 9 4.293 5.707a1 1 0 010-1.414z"
-                      clipRule="evenodd"/>
-                  </svg>
-                </button>
-              </div>
-              <div className="modal-body">
-                <button onClick={cancellClass} className='p-4 bg-red-200'>Cancelar clase</button>
+          <div className="modal-container bg-white w-4/10  rounded-xl shadow-lg z-50 overflow-y-auto">
+            <div className="modal-content py-8 text-left px-8">
+              <p className="text-2xl text-center font-bold">¿Seguro que quieres cancelar la clase?</p> 
+              <div className='flex gap-4 pt-6'>
+                <div className="modal-body w-1/2">
+                  <button onClick={cancellClass} className='w-full p-4 bg-red-400 rounded-md font-semibold text-white'>Si, cancelar clase</button>
+                </div>
+                <div className="modal-body w-1/2">
+                  <button onClick={() => setDeleteID("")} className='w-full p-4 bg-[#252422] hover:bg-[#000000] font-semibold text-white duration-200 rounded-md'>No, cerrar</button>
+                </div>
               </div>
             </div>
           </div>

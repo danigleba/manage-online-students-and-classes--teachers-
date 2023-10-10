@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import NextClasses from '@/components/NextClasses'
 import Students from '@/components/Students'
 import { useRouter } from 'next/router'
@@ -26,10 +27,12 @@ export default function Home() {
   }, [])
   
   return (
-    <main className='mx-6'>
+    <main>
       <Header user={user} />
       <NextClasses user={user}/>
+      <div className='my-12'></div>
       <Students user={user} />
+      <Footer />
     </main>
   )
 }

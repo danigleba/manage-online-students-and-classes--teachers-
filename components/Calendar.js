@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-
+import {TiDelete} from 'react-icons/ti'
 export default function Calendar(props) {
     const router = useRouter()
     const [classes, setClasses] = useState([])
@@ -48,31 +48,37 @@ export default function Calendar(props) {
         }
   }
   return (
-    <main className="pt-8 overflow-hidden">
+    <main className="pt-8">
       <h2 className='px-8'>Clases programadas</h2>
-      <div className='flex gap-4 px-8'>
-            <button onClick={() => setType("All")} className='bg-gray-200 px-4 py-2 rounded-full'>Todas</button>
-            <button onClick={() => setType("Week")}  className='bg-gray-200 px-4 py-2 rounded-full'>Esta semana</button>
-            <button onClick={() => setType("Month")}  className='bg-gray-200 px-4 py-2 rounded-full'>Este mes</button>
+      <div className='flex gap-4 px-8 text-sm font-semibold mt-4 mb-6'>
+            <button onClick={() => setType("Week")}  className={`${type == "Week" ? "bg-[#6156f6] text-white" : "bg-gray-200"} hover:bg-[#6156f6] hover:text-white duration-200 px-4 py-2 rounded-full`}>Esta semana</button>
+            <button onClick={() => setType("Month")}  className={`${type == "Month" ? "bg-[#6156f6] text-white" : "bg-gray-200"} hover:bg-[#6156f6] hover:text-white duration-200 px-4 py-2 rounded-full`}>Este mes</button>
+            <button onClick={() => setType("All")} className={`${type == "All" ? "bg-[#6156f6] text-white" : "bg-gray-200"} hover:bg-[#6156f6] hover:text-white duration-200 px-4 py-2 rounded-full`}>Todas</button>
       </div>
-        {type}
       <div className="flex w-screen items-center">
         <div className="px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-          {classes.map((item) => (
+        {classes.map((item) => (
             <a key={item.id}>
-              <div className='w-full bg-white shadow-[0_0px_50px_rgb(0,0,0,0.08)] rounded-xl p-6'>
-                <div className="flex justify-between pb-8">
+              <div className='w-full bg-white duration-200 shadow-[0_3px_10px_rgb(0,0,0,0.15)] rounded-xl p-6'>
+                <div className="flex justify-between pb-6">
                   <div className="flex gap-4">
-                    <Image className='rounded-full' alt="Student's profile picture" height={50} width={50} src={item?.profile_url} />
+                    <Image className='rounded-full' alt="Student's profile picture" height={50} width={50} src={item?.student_profile} />
                     <div>
                       <p className="font-bold">{item?.day.substr(-2)} de {months[parseInt(item?.day.slice(5, 7)) - 1]}, {item?.start_time} h</p>
                       <p className="font-light">Con {item.tutor_name}</p>
                     </div>
                   </div>
                 </div>
-                <div className='flex flex-col gap-4'>
-                  <button className='bg-black font-medium text-white py-2 rounded-md hover:bg-[#f4f4f4] hover:text-black duration-200'>Empezar clase</button>
-                  <button onClick={() => setDeleteID(item.id)}  className='border-2 border-red-400 font-medium text-red-400 py-1.5 rounded-md hover:bg-red-400 hover:text-white duration-200'>Cancelar clase</button>
+                <div className='flex flex-col justify-center gap-4'>
+                  <div>
+                    <button className='w-full bg-[#6156f6] font-semibold text-white py-2 rounded-md hover:bg-[#5047c9] duration-200'>Empezar clase</button>
+                  </div>
+                  <div className='flex justify-center'>
+                    <button onClick={() => setDeleteID(item.id)} className='hover:bg-red-400 duration-200 bg-[#252422] font-normal text-red-400 py-1.5 items-center  gap-1.5 rounded-md w-max px-4 text-white duration-200 text-sm flex justify-center'>
+                      <TiDelete stroke-width="0" color="white" size={20} />
+                      <p>Cancelar clase</p>
+                    </button>
+                  </div>
                 </div>
               </div>
             </a>
