@@ -37,9 +37,9 @@ export default function Headers(props) {
     return (
         <main className="mx-6 my-4 h-max flex justify-between items-center">
             <div>
-                <a href="/" className='font-bold text-[#6156f6] text-xl'>cornelio</a>
+                <a href="/" className='font-bold text-[#eb4c60] text-xl'>cornelio</a>
             </div>
-            <div className='hidden md:flex text-lg font-bold gap-12'>
+            <div className='hidden md:flex text-lg font-medium gap-12'>
                 <a href="/">Clases</a>
                 <a href="/#students">Alumnos</a>
                 <a href="/calendar">Calendario</a>
@@ -49,7 +49,7 @@ export default function Headers(props) {
                   <AddStudentButton user={props?.user} />
                 </div>
                 <div>
-                    <p className="hidden md:flex font-bold text-lg">{props?.user?.displayName}</p>
+                    <p className="hidden md:flex font-semibold text-lg">{props?.user?.displayName}</p>
                 </div>
                 <Image className='rounded-full' alt="Tutor's profile picture" height={50} width={50} src={props?.user?.photoURL}/>
             </div>

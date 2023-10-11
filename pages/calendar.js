@@ -22,6 +22,7 @@ export default function Home() {
     <main>
       <Header user={user} />
       <Calendar user={user}/>
+      <div className='py-24'></div>
       <Footer />
     </main>
   )

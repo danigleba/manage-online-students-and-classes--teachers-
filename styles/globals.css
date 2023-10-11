@@ -4,6 +4,6 @@
 
 @layer base {
     h2 {
-        @apply text-[#252422] font-extrabold text-2xl text-left;
+        @apply text-[#252422] font-bold text-2xl text-left;
       }
 }

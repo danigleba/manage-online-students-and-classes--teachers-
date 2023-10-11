@@ -32,6 +32,7 @@ export default function Home() {
       <NextClasses user={user}/>
       <div className='my-12'></div>
       <Students user={user} />
+      <div className='my-24'></div>
       <Footer />
     </main>
   )
