@@ -74,7 +74,7 @@ export default function Signup() {
             </Head>
             <main className="bg-[#f4f4f4] text-[#252422]">  
                 <div className="flex justify-center md:grid grid-cols-2 w-full">
-                    <div className="rounded-xl w-full flex px-6 md:px-12 flex-col space-y-3 justify-center text-center items-center">
+                    <div className="rounded-xl w-full flex px-4 md:px-12 flex-col space-y-3 justify-center text-center items-center">
                         {authState == "Google signup" ? (
                             <div className="flex h-screen items-center text-center flex-col space-y-3 justify-center w-full">
                                 <p className="font-bold text-2xl">Crea tu cuenta</p>
@@ -91,7 +91,7 @@ export default function Signup() {
                             (<div className="h-screen w-full items-center justify-center flex flex-col space-y-4 text-md font-medium text-left">
                                 <div className="w-full">
                                     <p className="pb-2">Número de teléfono</p>
-                                    <input onChange={(e) => setPhoneNumber(e.target.value)} placeholder="(+34) 424 242 424" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                                    <input onChange={(e) => setPhoneNumber(e.target.value)} placeholder="(+34) 424 242 424" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                                 </div>   
                                 <div className="w-full">
                                     <p className="mb-2">¿Qué plataforma usas?</p>
@@ -108,15 +108,15 @@ export default function Signup() {
                                     <p className="text-center font-semibold mt-4">¿Cuánto cobras por tus clases? (€)</p>
                                     <div className="pb-4">
                                         <p className="mb-2">1 clase</p>
-                                        <input onChange={(e) => setPrice1(e.target.value)} type="number" placeholder="20" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                                        <input onChange={(e) => setPrice1(e.target.value)} type="number" placeholder="20" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                                     </div>   
                                     <div className="pb-4">
                                         <p className="mb-2">10 clases</p>
-                                        <input onChange={(e) => setPrice10(e.target.value)} type="number" placeholder="180" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                                        <input onChange={(e) => setPrice10(e.target.value)} type="number" placeholder="180" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                                     </div>   
                                     <div className="pb-4">
                                         <p className="mb-2">20 clases</p>
-                                        <input onChange={(e) => setPrice20(e.target.value)} type="number" placeholder="350" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                                        <input onChange={(e) => setPrice20(e.target.value)} type="number" placeholder="350" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                                     </div>   
                                     <div>
                                         <button onClick={sumitTutorsInfo} className="mt-4 w-full bg-[#eb4c60] hover:bg-[#d63c4f] py-2 rounded-md text-white">Enviar</button>
