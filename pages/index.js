@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { useRouter } from "next/router"
 import { useState, useEffect} from "react"
 import { auth } from "@/utils/firebase"
@@ -26,13 +27,25 @@ export default function Index() {
     })    
   }, [])
   return (
-    <main>
-      <Header user={user} />
-      <NextClasses user={user}/>
-      <div className='my-24'></div>
-      <Students user={user} />
-      <BottomNavBar page={"index"} />
-      <Footer />
-    </main>
+    <>
+      <Head>
+        <title>Cornelio</title>
+        <meta name="description" content="Your meta description goes here" />
+        <meta name="author" content="Cornelio Tutors" />
+        <link rel="icon" href="/icon.png" />
+        <link rel="canonical" href="https://tutors.getcornelio.com/"/>
+        <meta property="og:title" content="Cornelio Tutors" />
+        <meta property="og:description" content="Your meta description goes here" />
+        <meta property="og:image" content="https://example.com/og-image.jpg" />
+      </Head>
+      <main>
+        <Header user={user} />
+        <NextClasses user={user}/>
+        <div className='my-24'></div>
+        <Students user={user} />
+        <BottomNavBar page={"index"} />
+        <Footer />
+      </main>
+    </>
   )
 }

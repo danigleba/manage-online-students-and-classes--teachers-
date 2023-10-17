@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { useState } from "react"
 import { useRouter } from "next/router"
 import { auth } from "@/utils/firebase"
@@ -60,64 +61,76 @@ export default function Signup() {
         }
     }
     return (
-        <main className="bg-[#f4f4f4] text-[#252422]">  
-            <div className="flex justify-center md:grid grid-cols-2 w-full">
-                 <div className="rounded-xl w-full flex px-6 md:px-12 flex-col space-y-3 justify-center text-center items-center">
-                    {authState == "Google signup" ? (
-                        <div className="flex h-screen items-center text-center flex-col space-y-3 justify-center w-full">
-                            <p className="font-bold text-2xl">Crea tu cuenta</p>
-                            <div className="border-t-2 w-full flex justify-center border-[#252422]"/>
-                            <div className="flex justify-center w-full">
-                                <button onClick={handleGoogleSignIn} className={`gap-4 w-full md:px-16 py-2 bg-[#eb4c60] hover:bg-[#d63c4f] flex items-center justify-center rounded-lg text-white font-bold`}>
-                                    <BsGoogle color={"white"} />
-                                    <p>Entrar con Google</p>
-                                </button>
-                            </div>
-                            <p className="pt-2">¿Ya tienes una cuenta? <a href="/login" className="text-blue-400 underline">Inicia sesión</a></p>
-                        </div>) 
-                        : 
-                        (<div className="h-screen w-full items-center justify-center flex flex-col space-y-4 text-md font-medium text-left">
-                            <div className="w-full">
-                                <p className="pb-2">Número de teléfono</p>
-                                <input onChange={(e) => setPhoneNumber(e.target.value)} placeholder="(+34) 424 242 424" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
-                            </div>   
-                            <div className="w-full">
-                                <p className="mb-2">¿Qué plataforma usas?</p>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <button onClick={() => setVCPlatform("Google meet")} className={`${vc_platform == "Google meet" ? "bg-[#eb4c60] hover:bg-[#d63c4f]" : "bg-[#252422] hover:bg-[#000000]"} flex items-center justify-center gap-4 w-full h-12 font-semibold text-white rounded-md`}>
-                                        <SiGooglemeet />
-                                        Google Meet</button>
-                                    <button onClick={() => setVCPlatform("Zoom")} className={`${vc_platform == "Zoom" ? "bg-[#eb4c60] hover:bg-[#d63c4f]" : "bg-[#252422] hover:bg-[#000000]"} flex items-center justify-center gap-4 w-full h-12 bg-[#252422] hover:bg-[#000000] text-white font-semibold rounded-md`}>
-                                        <BiLogoZoom  size={22}/>
-                                        Zoom</button>
-                            </div> 
-                            </div>  
-                            <div className="text-md font-medium w-full">
-                                <p className="text-center font-semibold mt-4">¿Cuánto cobras por tus clases? (€)</p>
-                                <div className="pb-4">
-                                    <p className="mb-2">1 clase</p>
-                                    <input onChange={(e) => setPrice1(e.target.value)} type="number" placeholder="20" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+        <>
+            <Head>
+            <title>Cornelio | Sigup</title>
+            <meta name="description" content="Your meta description goes here" />
+            <meta name="author" content="Cornelio Tutors" />
+            <link rel="icon" href="/icon.png" />
+            <link rel="canonical" href="https://tutors.getcornelio.com/"/>
+            <meta property="og:title" content="Cornelio Tutors" />
+            <meta property="og:description" content="Your meta description goes here" />
+            <meta property="og:image" content="https://example.com/og-image.jpg" />
+            </Head>
+            <main className="bg-[#f4f4f4] text-[#252422]">  
+                <div className="flex justify-center md:grid grid-cols-2 w-full">
+                    <div className="rounded-xl w-full flex px-6 md:px-12 flex-col space-y-3 justify-center text-center items-center">
+                        {authState == "Google signup" ? (
+                            <div className="flex h-screen items-center text-center flex-col space-y-3 justify-center w-full">
+                                <p className="font-bold text-2xl">Crea tu cuenta</p>
+                                <div className="border-t-2 w-full flex justify-center border-[#252422]"/>
+                                <div className="flex justify-center w-full">
+                                    <button onClick={handleGoogleSignIn} className={`gap-4 w-full md:px-16 py-2 bg-[#eb4c60] hover:bg-[#d63c4f] flex items-center justify-center rounded-lg text-white font-bold`}>
+                                        <BsGoogle color={"white"} />
+                                        <p>Entrar con Google</p>
+                                    </button>
+                                </div>
+                                <p className="pt-2">¿Ya tienes una cuenta? <a href="/login" className="text-blue-400 underline">Inicia sesión</a></p>
+                            </div>) 
+                            : 
+                            (<div className="h-screen w-full items-center justify-center flex flex-col space-y-4 text-md font-medium text-left">
+                                <div className="w-full">
+                                    <p className="pb-2">Número de teléfono</p>
+                                    <input onChange={(e) => setPhoneNumber(e.target.value)} placeholder="(+34) 424 242 424" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                                 </div>   
-                                <div className="pb-4">
-                                    <p className="mb-2">10 clases</p>
-                                    <input onChange={(e) => setPrice10(e.target.value)} type="number" placeholder="180" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
-                                </div>   
-                                <div className="pb-4">
-                                    <p className="mb-2">20 clases</p>
-                                    <input onChange={(e) => setPrice20(e.target.value)} type="number" placeholder="350" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
-                                </div>   
-                                <div>
-                                    <button onClick={sumitTutorsInfo} className="mt-4 w-full bg-[#eb4c60] hover:bg-[#d63c4f] py-2 rounded-md text-white">Enviar</button>
-                                    <p className="text-center text-sm pt-2 font-light">{errorMessage}</p>
+                                <div className="w-full">
+                                    <p className="mb-2">¿Qué plataforma usas?</p>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <button onClick={() => setVCPlatform("Google meet")} className={`${vc_platform == "Google meet" ? "bg-[#eb4c60] hover:bg-[#d63c4f]" : "bg-[#252422] hover:bg-[#000000]"} flex items-center justify-center gap-4 w-full h-12 font-semibold text-white rounded-md`}>
+                                            <SiGooglemeet />
+                                            Google Meet</button>
+                                        <button onClick={() => setVCPlatform("Zoom")} className={`${vc_platform == "Zoom" ? "bg-[#eb4c60] hover:bg-[#d63c4f]" : "bg-[#252422] hover:bg-[#000000]"} flex items-center justify-center gap-4 w-full h-12 bg-[#252422] hover:bg-[#000000] text-white font-semibold rounded-md`}>
+                                            <BiLogoZoom  size={22}/>
+                                            Zoom</button>
+                                </div> 
+                                </div>  
+                                <div className="text-md font-medium w-full">
+                                    <p className="text-center font-semibold mt-4">¿Cuánto cobras por tus clases? (€)</p>
+                                    <div className="pb-4">
+                                        <p className="mb-2">1 clase</p>
+                                        <input onChange={(e) => setPrice1(e.target.value)} type="number" placeholder="20" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                                    </div>   
+                                    <div className="pb-4">
+                                        <p className="mb-2">10 clases</p>
+                                        <input onChange={(e) => setPrice10(e.target.value)} type="number" placeholder="180" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                                    </div>   
+                                    <div className="pb-4">
+                                        <p className="mb-2">20 clases</p>
+                                        <input onChange={(e) => setPrice20(e.target.value)} type="number" placeholder="350" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                                    </div>   
+                                    <div>
+                                        <button onClick={sumitTutorsInfo} className="mt-4 w-full bg-[#eb4c60] hover:bg-[#d63c4f] py-2 rounded-md text-white">Enviar</button>
+                                        <p className="text-center text-sm pt-2 font-light">{errorMessage}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
+                    <div className="hidden md:block">
+                        <div className="bg-cover bg-center bg-[url('https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/stock_pictures%2Fauth_bg.webp?alt=media&token=d2fd8cde-eb2e-4f53-99ed-c281af97c971&_gl=1*d4dtyp*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5NzUzMjU4Ny4xOTIuMS4xNjk3NTMzMDk1LjU2LjAuMA..')] w-full h-screen"></div>
+                    </div>
                 </div>
-                <div className="hidden md:block">
-                    <div className="bg-cover bg-center bg-[url('https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/stock_pictures%2Fauth_bg.webp?alt=media&token=d2fd8cde-eb2e-4f53-99ed-c281af97c971&_gl=1*d4dtyp*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5NzUzMjU4Ny4xOTIuMS4xNjk3NTMzMDk1LjU2LjAuMA..')] w-full h-screen"></div>
-                </div>
-            </div>
-        </main>
+            </main>
+        </>
     )
 }

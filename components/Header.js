@@ -34,7 +34,7 @@ export default function Headers(props) {
     }, [])
     return (
         <main className="pb-24 w-full">
-            <div className="fixed px-6 py-4 md:py-2  flex justify-between items-center bg-white w-screen">
+            <div className="fixed px-4 md:px-6 py-4 md:py-2  flex justify-between items-center bg-white w-screen">
                 <div>
                     <button onClick={() => router.push("/")}>
                         <Image alt="Cornelio's logo" height={80} width={80} src="https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/cornelio_logo.png?alt=media&token=9b76d88a-641f-499f-92d2-69b4065e0b59&_gl=1*1moty0o*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5NzUzNTE2Ny4xOTMuMS4xNjk3NTM1MTcyLjU1LjAuMA.." />

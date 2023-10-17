@@ -40,7 +40,7 @@ export default function Calendar(props) {
             ))}
           </div>
         ) : (
-          <div className={`${classes.length == 0 ? "mb-56" : ""} mx-4 md:mx-6 flex justify-center mt-6`}>
+          <div className={`${classes.length == 0 ? "mb-56" : ""} w-full mx-4 md:mx-6 flex justify-center mt-6`}>
             <div className='w-full flex-col justify-center'>
               <p className='text-center font-light text-lg'>No tienes ninguna clase más hoy. <br/>Añade alumnos para que reserven clases contigo.</p>
               <div className='pt-6 flex justify-center'>
