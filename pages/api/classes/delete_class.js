@@ -1,5 +1,5 @@
-import { db } from '@/utils/firebase'
-import { doc, deleteDoc, getDoc, getDocs, query, collection, where, updateDoc} from "firebase/firestore"
+import { db } from "@/utils/firebase"
+import { doc, deleteDoc, getDoc, getDocs, query, collection, where, updateDoc } from "firebase/firestore"
 
 export default async function handler(req, res) {
     const class_id = req.query.class_id
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
                 ...paidClasses,
                 [tutor]: parseInt(tutorValue) + 1,
             }
-            updateDoc(studentDocRef, { paid_classes: updatedPaidClasses });
+            updateDoc(studentDocRef, { paid_classes: updatedPaidClasses })
         })
         await deleteDoc(doc(db, "classes", class_id))
         res.status(200).json({ classDeleted: true })

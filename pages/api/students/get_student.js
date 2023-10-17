@@ -1,5 +1,5 @@
-import { db } from '@/utils/firebase'
-import { doc, deleteDoc, getDoc, getDocs, query, collection, where, updateDoc} from "firebase/firestore"
+import { db } from "@/utils/firebase"
+import { doc, getDoc } from "firebase/firestore"
 
 export default async function handler(req, res) {
     const student_id = req.query.student_id

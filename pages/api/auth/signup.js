@@ -1,5 +1,5 @@
-import {db} from '@/utils/firebase'
-import { collection, addDoc, query, where, getDocs} from "firebase/firestore"; 
+import { db } from "@/utils/firebase"
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore"
 
 export default async function (req, res) {
     const profile_url = req.query.profile_url

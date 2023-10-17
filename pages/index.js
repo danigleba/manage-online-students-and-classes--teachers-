@@ -1,17 +1,17 @@
-import { Inter } from 'next/font/google'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import NextClasses from '@/components/NextClasses'
-import Students from '@/components/Students'
-import { useRouter } from 'next/router'
-import { useState, useEffect} from 'react'
-import { auth } from '@/utils/firebase'
-import { onAuthStateChanged } from 'firebase/auth'
-
+import { useRouter } from "next/router"
+import { useState, useEffect} from "react"
+import { auth } from "@/utils/firebase"
+import { onAuthStateChanged } from "firebase/auth"
+import Header from "@/components/Header"
+import Footer from "@/components/Footer"
+import BottomNavBar from "@/components/BottomNavBar"
+import NextClasses from "@/components/NextClasses"
+import Students from "@/components/Students"
+import { Inter } from "next/font/google"
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Index() {
   const router = useRouter()  
   const [user, setUser] = useState({})
 
@@ -25,7 +25,6 @@ export default function Home() {
       }
     })    
   }, [])
-  
   return (
     <main>
       <Header user={user} />
@@ -33,6 +32,7 @@ export default function Home() {
       <div className='my-12'></div>
       <Students user={user} />
       <div className='my-24'></div>
+      <BottomNavBar page={"index"} />
       <Footer />
     </main>
   )

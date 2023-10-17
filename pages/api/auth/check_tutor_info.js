@@ -1,5 +1,5 @@
-import {db} from '@/utils/firebase'
-import { collection, updateDoc, query, where, getDocs} from "firebase/firestore"; 
+import {db} from "@/utils/firebase"
+import { collection, query, where, getDocs } from "firebase/firestore"
 
 export default async function (req, res) {
     const email = req.query.email 

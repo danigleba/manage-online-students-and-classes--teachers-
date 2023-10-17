@@ -1,5 +1,5 @@
-import { storage } from "@/utils/firebase";
-import {ref, listAll, getDownloadURL} from '@firebase/storage'
+import { storage } from "@/utils/firebase"
+import { ref, listAll, getDownloadURL} from "@firebase/storage"
 
 async function getFilesFromFolder(folder) {
     const folderRef = ref(storage, folder)
@@ -28,7 +28,7 @@ export default async (req, res) => {
     res.status(200).json({data: files});
   } catch (error) {
     console.error("Error fetching files:", error);
-    res.status(500).json({ error: "Error fetching files" });
+    res.status(500).json({ error: "Error fetching files" })
   }
 };
 
