@@ -1,8 +1,6 @@
 import { useRouter } from "next/router"
-import Image from "next/image"
 import { auth } from "@/utils/firebase"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import Footer from "@/components/Footer"
 import { BsGoogle } from "react-icons/bs"
 import { Inter } from "next/font/google"
 
@@ -33,23 +31,22 @@ export default function Login() {
   }
   return (
     <main className="bg-[#f4f4f4]">   
-      <div className="flex justify-center grid grid-cols-2 w-full">
-        <div>
-          <Image alt="Women working remotely" width={1000} height={300} src="https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/stock_pictures%2Fauth_bg.webp?alt=media&token=d2fd8cde-eb2e-4f53-99ed-c281af97c971&_gl=1*e83cqw*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5NzA0MTYyMi4xODQuMS4xNjk3MDQyODEwLjQ3LjAuMA.." />
-        </div>
-        <div className="rounded-xl w-full flex p-12 flex-col space-y-3 justify-center text-center items-center">
-          <p className="font-bold text-2xl">Iniciar sesión</p>
+      <div className="flex justify-center md:grid grid-cols-2 w-full">
+        <div className="h-screen w-full flex px-4 md:px-12 flex-col space-y-3 justify-center text-center items-center">
+          <p className="font-bold text-2xl text-[#252422]">Iniciar sesión</p>
           <div className="border-t-2 w-full flex justify-center border-[#252422]"></div>
           <div className="flex justify-center w-full">
-            <button onClick={handleGoogleSignIn} className="gap-4 w-full md:px-16 py-2 bg-[#eb4c60] hover:bg-[#d63c4f] flex items-center justify-center rounded-lg text-white font-bold">
+            <button onClick={handleGoogleSignIn} className="gap-4 w-full md:px-16 py-2 bg-[#eb4c60] hover:bg-[#d63c4f] flex items-center text-white justify-center rounded-lg font-bold">
               <BsGoogle color={"white"} />
               <p>Entrar con Google</p>
             </button>
           </div>
-          <p className="pt-2">¿Aún no tienes una cuenta? <a href="/signup" className="text-blue-400 underline">Regístrate</a></p>
+          <p className="pt-2 text-[#252422]">¿Aún no tienes una cuenta? <a href="/signup" className="text-blue-400 underline">Regístrate</a></p>
+        </div>
+        <div className="hidden md:block">
+          <div className="bg-cover bg-center bg-[url('https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/stock_pictures%2Fauth_bg.webp?alt=media&token=d2fd8cde-eb2e-4f53-99ed-c281af97c971&_gl=1*d4dtyp*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5NzUzMjU4Ny4xOTIuMS4xNjk3NTMzMDk1LjU2LjAuMA..')] w-full h-screen"></div>
         </div>
       </div>
-      <Footer />
     </main>
   )
 }

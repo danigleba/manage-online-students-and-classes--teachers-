@@ -5,7 +5,7 @@ export default function ClassCard(props) {
     const months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "sebtiembre", "octubre", "noviembre", "diciembre"]
     return (
         <main>
-            <div className="w-full bg-white duration-200 shadow-[0_0px_30px_rgb(0,0,0,0.1)] rounded-xl p-6">
+            <div className="w-full bg-white duration-200 shadow-[0_0px_30px_rgb(0,0,0,0.1)] rounded-lg p-6">
                 <div className="flex justify-between pb-6">
                     <div className="flex gap-4">
                         <Image className="rounded-full" alt="Student's profile picture" height={50} width={50} src={props?.item?.student_profile} />

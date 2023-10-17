@@ -45,12 +45,12 @@ export default function NextClasses(props) {
 
   const visibleClasses = classes.slice(slide, slide + nSlide)
   return (
-    <main className="pt-6 mx-6">
+    <main className="mx-4 md:mx-6">
     <h2 className="mb-6">Clases del día</h2>
     <div className="flex items-center w-full">
       {classes?.length > 0 ? (
-        <div>
-          <div className="w-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+        <div className='w-screen'>
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
             {visibleClasses.map((item) => (
               <a key={item.id}>
                 <ClassCard item={item} />
@@ -80,7 +80,7 @@ export default function NextClasses(props) {
         </div>
       ) : (
         <div className='w-full flex-col justify-center'>
-          <p className='text-center font-light text-lg'>No tienes ninguna clase más hoy. <br/>Añade alumnos para que reserven clases contigo.</p>
+          <p className='text-center font-light text-md md:text-lg'>No tienes ninguna clase más hoy. <br/>Añade alumnos para que reserven clases contigo.</p>
           <div className='pt-6 flex justify-center'>
             <AddStudentButton />
           </div>

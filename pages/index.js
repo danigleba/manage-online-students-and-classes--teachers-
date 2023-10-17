@@ -29,9 +29,8 @@ export default function Index() {
     <main>
       <Header user={user} />
       <NextClasses user={user}/>
-      <div className='my-12'></div>
-      <Students user={user} />
       <div className='my-24'></div>
+      <Students user={user} />
       <BottomNavBar page={"index"} />
       <Footer />
     </main>

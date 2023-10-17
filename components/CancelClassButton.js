@@ -32,7 +32,7 @@ export default function CancellClassButton(props) {
   return (
     <main>
         <button onClick={() => setDeleteID(props?.item?.id)} className='hover:bg-gray-200 duration-200 bg-[#f4f4f4] font-medium py-1.5 px-4 items-center gap-1.5 rounded-md w-max text-[#252422] text-sm flex justify-center'>
-            <TiDelete stroke-width="0" color="#252422" size={20} />
+            <TiDelete strokeWidth="0" color="#252422" size={20} />
             <p>Cancelar clase</p>
         </button>
         {/*Confirmation modal*/}

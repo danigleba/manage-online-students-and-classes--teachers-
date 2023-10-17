@@ -23,7 +23,6 @@ export default function CalendarPage() {
     <main>
       <Header user={user} />
       <Calendar user={user}/>
-      <div className='py-24'></div>
       <BottomNavBar page={"calendar"}/>
       <Footer />
     </main>
