@@ -45,8 +45,8 @@ export default function NextClasses(props) {
 
   const visibleClasses = classes.slice(slide, slide + nSlide)
   return (
-    <main className="mx-4 md:mx-6">
-    <h2 className="mb-6">Clases del día</h2>
+    <main className="mx-6 md:mx-10">
+    <h2 className="mb-4">Clases del día</h2>
     <div className="flex items-center w-full">
       {classes?.length > 0 ? (
         <div className='w-screen'>
@@ -59,20 +59,20 @@ export default function NextClasses(props) {
           </div>
           {classes.length > nSlide ? (
             <div className="pt-6 flex gap-4 justify-center items-center">
-              <button onClick={handlePrevSlide} disabled={slide === 0} className={`${slide === 0 ? "bg-gray-100" : "bg-white shadow-[0_0px_30px_rgb(0,0,0,0.1)]" } flex items-center rounded-full p-3 rounded-md`}>
-                <BiSolidLeftArrow color="#252422" size={20} />
+              <button onClick={handlePrevSlide} disabled={slide === 0} className={`${slide === 0 ? "bg-gray-100" : "bg-white shadow-[0px_0px_15px_rgb(0,0,0,0.02)]" } border border-[#dddddd] flex items-center rounded-full p-3 rounded-md`}>
+                <BiSolidLeftArrow color="#222222" size={20} />
               </button>
               <div className="flex justify-center">
                 {classes.map((item, index) => {
-                  const className = `h-2.5 w-2.5 mx-1 rounded-full ${index >= slide && index < slide + nSlide ? 'bg-[#eb4c60]' : 'bg-gray-200'}`;
+                  const className = `h-2.5 w-2.5 mx-1 rounded-full ${index >= slide && index < slide + nSlide ? 'bg-[#eb4c60]' : 'bg-[#dddddd]'}`;
                   return (
                     <div key={item.id} className={className}></div>
                   );
                 })}
               </div>
               <div>
-                <button onClick={handleNextSlide} disabled={slide === classes.length - nSlide} className={`${slide === classes.length - nSlide ? "bg-gray-100" : "bg-white shadow-[0_0px_30px_rgb(0,0,0,0.1)]" } flex items-center rounded-full p-3 rounded-md `}>
-                  <BiSolidRightArrow color="#252422" size={20} />
+                <button onClick={handleNextSlide} disabled={slide === classes.length - nSlide} className={`${slide === classes.length - nSlide ? "bg-gray-100" : "bg-white shadow-[0px_0px_15px_rgb(0,0,0,0.02)]" } border border-[#dddddd] flex items-center rounded-full p-3 rounded-md `}>
+                  <BiSolidRightArrow color="#222222" size={20} />
                 </button>
               </div>
             </div>

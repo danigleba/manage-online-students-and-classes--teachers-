@@ -41,10 +41,10 @@ export default function Index() {
       <main>
         <Header user={user} />
         <NextClasses user={user}/>
-        <div className='my-24'></div>
+        <div className="w-full h-20"></div>
         <Students user={user} />
         <BottomNavBar page={"index"} />
-        <Footer />
+
       </main>
     </>
   )
