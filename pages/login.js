@@ -1,5 +1,6 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
+import Image from 'next/image'
 import { auth } from "@/utils/firebase"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { FcGoogle } from "react-icons/fc"
@@ -48,6 +49,7 @@ export default function Login() {
             <div className="bg-cover bg-center bg-[url('https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/stock_pictures%2Fauth_bg.webp?alt=media&token=d2fd8cde-eb2e-4f53-99ed-c281af97c971&_gl=1*d4dtyp*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5NzUzMjU4Ny4xOTIuMS4xNjk3NTMzMDk1LjU2LjAuMA..')] w-full h-screen"></div>
           </div>
           <div className="h-screen w-full flex px-6 md:px-10 flex-col space-y-3 justify-center text-center items-center">
+            <Image className="absolute mb-72" alt="alba's logo" width={150} height={150} src="https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/logo.png?alt=media&token=36fa1da0-40a9-4e2e-a6f7-9f3fc5d77510&_gl=1*1x34fcy*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5ODYwMjYxMS4xOTUuMS4xNjk4NjA0OTMyLjQ3LjAuMA.." />
             <p className="font-bold text-2xl text-[#222222]">Iniciar sesión</p>
             <div className="border-t w-full flex justify-center border-[#dddddd]"></div>
             <div className="flex justify-center w-full">
