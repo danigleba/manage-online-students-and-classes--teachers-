@@ -37,7 +37,7 @@ export default function Headers(props) {
             <div className="fixed top-0 px-6 md:px-10 py-3 flex justify-between items-center bg-white w-screen">
                 <div>
                     <button onClick={() => router.push("/")}>
-                        <Image alt="Cornelio's logo" height={80} width={80} src="https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/cornelio_logo.png?alt=media&token=9b76d88a-641f-499f-92d2-69b4065e0b59&_gl=1*1moty0o*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5NzUzNTE2Ny4xOTMuMS4xNjk3NTM1MTcyLjU1LjAuMA.." />
+                        <Image alt="Cornelio's logo" height={100} width={100} src="https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/logo.png?alt=media&token=fd0b5137-1d16-47c1-9d56-bfdfc46c844f&_gl=1*1r1t70m*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5ODYwMjYxMS4xOTUuMS4xNjk4NjAzNzA3LjE2LjAuMA.." />
                     </button>
                 </div>
                 <div className='hidden md:flex font-semibold text-lg gap-12 text-[#222222]'>
