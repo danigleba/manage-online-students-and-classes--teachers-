@@ -29,7 +29,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>Cornelio</title>
+        <title>Alba | Clases</title>
         <meta name="description" content="Your meta description goes here" />
         <meta name="author" content="Cornelio Tutors" />
         <link rel="icon" href="/icon.png" />

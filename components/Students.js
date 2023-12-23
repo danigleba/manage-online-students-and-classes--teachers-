@@ -26,12 +26,12 @@ export default function Students(props) {
             {students.map((item) => (
               <a href={`/s/${item.id}`} key={item.id}>
                 <div className="flex justify-between shadow-[0px_0px_15px_rgb(0,0,0,0.02)] border border-[#dddddd]  duration-200 items-center w-full bg-white rounded-2xl p-5 text-[#252422]">
-                  <div className="flex gap-4 md:gap-6">
+                  <div className="flex items-center gap-4 md:gap-6">
                     <div>
-                      <Image className="rounded-full" alt="Student's profile picture" height={65} width={65} src={item?.profile_url}/>
+                      <Image className="rounded-full" alt="Student's profile picture" height={50} width={50} src={item?.profile_url}/>
                     </div>
                     <div className="space-y-1">
-                      <p className="font-bold text-lg text-[#222222]">{item?.username}</p>
+                      <p className="font-bold text-md text-[#222222]">{item?.username}</p>
                       {item && props?.user.email && item.paid_classes && (
                         <p className="bg-[#f7f7f7] px-4 py-1 border border-[#dddddd] text-center rounded-md font-semibold text-[#222222] text-sm">Le quedan {item.paid_classes[props.user.email] || 0} clases</p>
                       )}
