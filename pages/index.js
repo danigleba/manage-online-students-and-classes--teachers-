@@ -44,7 +44,6 @@ export default function Index() {
         <div className="w-full h-20"></div>
         <Students user={user} />
         <BottomNavBar page={"index"} />
-
       </main>
     </>
   )

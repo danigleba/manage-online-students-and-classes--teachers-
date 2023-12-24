@@ -1,8 +1,18 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { HiOutlinePlus } from "react-icons/hi"
 
 export default function AddStudentButton(props) {
     const [isOpen, setIsOpen] = useState(false)
+    const [alert, setAlert] = useState('')
+
+    const copyMessage = () => {
+      navigator.clipboard.writeText('👋 Hola! Reserva clases conmigo en students.getcornelio.com/signup')
+      setAlert('Mensaje copiado')
+    }
+
+    useEffect(() => {
+      if (!isOpen) setAlert('')
+    }, [isOpen]) 
     return (
       <main>
         <button onClick={() => setIsOpen(true)} className="hover:bg-[#d63c4f] duration-200 flex items-center gap-2 bg-[#eb4c60] rounded-md text-sm py-2 px-4 text-white font-semibold">
@@ -16,14 +26,22 @@ export default function AddStudentButton(props) {
             <div className="modal-content p-5 text-center">
               <p className="text-2xl font-bold text-[#222222]">Comparte este mensaje con tus alumnos</p> 
               <p className="text-xl font-normal text-[#222222]">para que reserven clases contigo</p>
-              <div className="mt-4 w-full bg-[#f7f7f7] border border-[#dddddd] rounded-xl text-center p-8">
-                <p className="text-left text-[#222222]">👋 Hola! <br/>Reserva clases conmigo en <a className="underline text-blue-400" href="https://students.getcornelio.com/signup">students.getcornelio.com/signup</a><br/> Al registrarte, búscame como: <b>{props?.user?.displayName}</b><br/>Así de fácil 🎉</p>
+              <div className="mt-4 w-full bg-[#f7f7f7] border border-[#dddddd] rounded-xl text-center p-4">
+                <p className="text-left text-[#222222] break-words">👋 Hola! Reserva clases conmigo en <a className="underline text-blue-400" href="https://students.getcornelio.com/signup">students.getcornelio.com/signup</a></p>
+                <p className={`font-medium ${alert == '' ? '' : 'mt-2'}`}>{alert}</p>
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="mt-4 modal-close py-2 bg-[#222222] hover:bg-[#000000] duration-200 rounded-lg w-full text-white font-semibold cursor-pointer">
-                Cerrar
-              </button>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => copyMessage()}
+                  className="mt-4 modal-close py-2 bg-[#eb4c60] hover:bg-[#d63c4f] duration-200 rounded-lg w-full text-white font-semibold text-sm md:text-md cursor-pointer">
+                  Copiar
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="mt-4 modal-close py-2 bg-[#222222] hover:bg-[#000000] duration-200 rounded-lg w-full text-white font-semibold text-sm md:text-md cursor-pointer">
+                  Cerrar
+                </button>
+              </div>
             </div>
           </div>
         </div>

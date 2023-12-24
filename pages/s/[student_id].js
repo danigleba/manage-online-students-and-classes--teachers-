@@ -6,7 +6,6 @@ import { auth } from "@/utils/firebase"
 import { onAuthStateChanged } from "firebase/auth"
 import FileUpload from "@/components/FileUpload"
 import Header from "@/components/Header"
-import Footer from "@/components/Footer"
 import AddStudentButton from "@/components/AddStudentsButtons"
 import ClassCard from "@/components/ClassCard"
 import BottomNavBar from "@/components/BottomNavBar"
@@ -124,7 +123,6 @@ export default function Student_id() {
           </div>
         )}
         <BottomNavBar page={"student"} />
-        <Footer />
       </main>
     </>
   )

@@ -38,15 +38,15 @@ export default function CancellClassButton(props) {
         {/*Confirmation modal*/}
         <div className={`fixed inset-0 flex items-center justify-center z-50 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300`}>
           <div className="modal-overlay absolute inset-0 bg-gray-800 opacity-50" />
-          <div className="modal-container bg-white w-full mx-6 md:mx-10 md:w-max  rounded-xl shadow-lg z-50 overflow-y-auto">
-            <div className="modal-content p-5 text-left text-[#222222]">
+          <div className="modal-container bg-white w-full md:w-max rounded-xl shadow-lg z-50 overflow-y-auto mx-4">
+            <div className="modal-content py-6 text-left px-6">
               <p className="text-xl text-center font-semibold">¿Seguro que quieres cancelar la clase?</p> 
-              <div className='flex gap-4 pt-4'>
+              <div className='flex gap-4 pt-6 text-sm md:text-md'>
                 <div className="modal-body w-1/2">
-                  <button onClick={cancellClass} className='w-full py-2 bg-[#222222] hover:bg-[#000000] rounded-md font-semibold text-white'>Si, cancelar clase</button>
+                  <button onClick={cancellClass} className='w-full py-2 bg-[#252422] hover:bg-[#000000] rounded-md font-semibold text-white'>Si, cancelar clase</button>
                 </div>
                 <div className="modal-body w-1/2">
-                  <button onClick={() => setDeleteID("")} className='w-full py-2 bg-[#f7f7f7] hover:bg-[#dddddd] border border-[#dddddd] font-semibold text-[#222222] duration-200 rounded-md'>No, cerrar</button>
+                  <button onClick={() => setDeleteID("")} className='w-full py-2 bg-[#f4f4f4] hover:bg-gray-200 font-semibold text-[#252422] duration-200 rounded-md'>No, cerrar</button>
                 </div>
               </div>
             </div>
