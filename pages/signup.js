@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { auth } from "@/utils/firebase"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { FcGoogle } from "react-icons/fc"
-import { SiGooglemeet } from "react-icons/si"
+//import { SiGooglemeet } from "react-icons/si"
 import { BiLogoZoom } from "react-icons/bi"
 import { Inter } from "next/font/google"
 
@@ -102,7 +102,7 @@ export default function Signup() {
                                     <p className="mb-2 font-medium">¿Qué plataforma usas?</p>
                                     <div className="grid grid-cols-2 gap-4">
                                         <button onClick={() => setVCPlatform("Google meet")} className={`${vc_platform == "Google meet" ? "bg-[#222222] text-white" : "bg-[#f7f7f7] hover:bg-[#dddddd]"} border border-[#dddddd] flex items-center justify-center gap-4 w-full h-12 text-[#222222] rounded-md`}>
-                                            <SiGooglemeet color={`${vc_platform == "Google meet" ? "#ffffff" : "#222222" }`}/>
+                                            {/*<SiGooglemeet color={`${vc_platform == "Google meet" ? "#ffffff" : "#222222" }`}/>*/}
                                             Google Meet</button>
                                         <button onClick={() => setVCPlatform("Zoom")} className={`${vc_platform == "Zoom" ? "bg-[#222222] text-white" : "bg-[#f7f7f7] hover:bg-[#dddddd]"} border border-[#dddddd] flex items-center justify-center gap-4 w-full h-12 bg-[#252422] hover:bg-[#000000] text-[#222222 rounded-md`}>
                                             <BiLogoZoom  size={22} color={`${vc_platform == "Zoom" ? "#ffffff" : "#222222" }`}/>

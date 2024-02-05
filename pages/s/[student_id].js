@@ -9,8 +9,9 @@ import Header from "@/components/Header"
 import AddStudentButton from "@/components/AddStudentsButtons"
 import ClassCard from "@/components/ClassCard"
 import BottomNavBar from "@/components/BottomNavBar"
-import { GrDocumentText } from "react-icons/gr"
+import { IoDocumentText } from "react-icons/io5";
 import { BsArrowRight } from "react-icons/bs"
+
 import { Inter } from "next/font/google"
 
 const inter = Inter({ subsets: ['latin'] })
@@ -72,21 +73,22 @@ export default function Student_id() {
             )}   
           </div>
         </div>
-        <div className="mx-6 md:mx-10 mb-4 flex gap-4 items-center mt-10">
-          <h2>Documentos</h2> 
-            <FileUpload student_email={student?.email} tutor_email={user?.email} />
+        <div className="flex justify-between md:justify-start items-center gap-4 mt-10 mx-6 md:mx-10 mb-4 ">
+          <div>
+            <h2>Documentos</h2> 
+          </div>
+          <FileUpload student_email={student?.email} tutor_email={user?.email} />
         </div> 
         {studentFiles.length > 0 ? (
           <div className="text-[#222222] mx-6 md:mx-10 flex grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-center font-medium">
             {studentFiles.map((item, index) => (
               <a target="_blank" href={item.downloadUrl}  key={item.id || index}>
-                <div className="px-8 w-full bg-white shadow-[0px_0px_15px_rgb(0,0,0,0.02)] border border-[#dddddd] duration-200 rounded-2xl p-4 flex justify-between items-center">
+                <div className="px-8 w-full bg-white shadow-[0px_0px_15px_rgb(0,0,0,0.02)] border border-[#dddddd] duration-200 rounded-xl p-4 flex justify-between items-center">
                   <div className="truncate flex items-center gap-4">
-                    <GrDocumentText color="#222222"/>
+                    <div className="w-max">
+                      <IoDocumentText size={20} color="#222222"/>
+                    </div>
                     <p className="truncate">{item.name}</p>
-                  </div>
-                  <div>
-                    <BsArrowRight color="#222222" size={22}/>
                   </div>
                 </div>
               </a>
