@@ -22,7 +22,7 @@ export default function CalendarPage() {
   return (  
     <>
       <Head>
-          <title>Cornelio | Calendario</title>
+          <title>Alba | Calendario</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Cornelio Tutors" />
           <link rel="icon" href="/icon.png" />

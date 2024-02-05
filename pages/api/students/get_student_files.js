@@ -24,10 +24,10 @@ export default async (req, res) => {
     const folder = `${student_email}/${tutor_email}`
 
   try {
-    const files = await getFilesFromFolder(folder);
-    res.status(200).json({data: files});
+    const files = await getFilesFromFolder(folder)
+    res.status(200).json({data: files})
   } catch (error) {
-    console.error("Error fetching files:", error);
+    console.error("Error fetching files:", error)
     res.status(500).json({ error: "Error fetching files" })
   }
 };

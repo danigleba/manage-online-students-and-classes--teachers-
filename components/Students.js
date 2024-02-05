@@ -3,22 +3,35 @@ import Image from "next/image"
 import AddStudentButton from "./AddStudentsButtons"
 import { BsArrowRight } from "react-icons/bs"
 
-export default function Students(props) {
+export default function Students({ user }) {
   const [students, setStudents] = useState([])
 
+  const getStudents = async () => {
+    try {
+      const response = await fetch(`/api/students/get_students?tutor_email=${user?.email}`, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user }), 
+      })
+      const data = await response.json()
+      setStudents(data.data)
+    } 
+    catch (error) {
+      console.error("Error fetching comments:", error.message)
+    } 
+  }
   useEffect(() => {
-    const url = "/api/students/get_students?tutor_email=" + props?.user?.email
-    fetch(url)
-        .then(response => response.json())
-        .then(data => setStudents(data.data))
-  }, [props?.user])
+    if (user) getStudents()
+  }, [user])
   return (
     <main id="students">
       <div className="mb-4 flex justify-between md:justify-start items-center gap-4 px-6 md:px-10">
         <div className="rounded-md flex items-center">
           <h2>Tus alumnos</h2>
         </div>
-        <AddStudentButton user={props?.user}/>
+        <AddStudentButton user={user}/>
       </div>
       <div className="flex w-screen items-center">
         {students.length > 0 ? (
@@ -32,8 +45,8 @@ export default function Students(props) {
                     </div>
                     <div className="space-y-1">
                       <p className="font-bold text-md text-[#222222]">{item?.username}</p>
-                      {item && props?.user.email && item.paid_classes && (
-                        <p className="bg-[#f7f7f7] px-4 py-1 border border-[#dddddd] text-center rounded-md font-semibold text-[#222222] text-sm">Le quedan {item.paid_classes[props.user.email] || 0} clases</p>
+                      {item && user.email && item.paid_classes && (
+                        <p className="bg-[#f7f7f7] px-4 py-1 border border-[#dddddd] text-center rounded-md font-semibold text-[#222222] text-sm">Le quedan {item.paid_classes[user.email] || 0} clases</p>
                       )}
                     </div>
                   </div>

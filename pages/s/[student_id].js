@@ -24,11 +24,61 @@ export default function Student_id() {
   const [classes, setClasses] = useState([])
   const [studentFiles, setStudentFiles] = useState([])
 
+  const getStudent = async () => {
+    try {
+      const response = await fetch(`/api/students/get_student?student_id=${student_id}`, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user }), 
+      })
+      const data = await response.json()
+      setStudent(data.data)
+    } 
+    catch (error) {
+      console.error("Error fetching comments:", error.message)
+    } 
+  }
+
+  const getStudentClasses = async () => {
+    try {
+      const response = await fetch(`/api/students/get_student_classes?student_email=${student?.email}`, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user }), 
+      })
+      const data = await response.json()
+      setClasses(data.data)
+    } 
+    catch (error) {
+      console.error("Error fetching comments:", error.message)
+    } 
+  }
+
+  const getStudentFiles = async () => {
+    try {
+      const response = await fetch(`/api/students/get_student_files?student_email=${student?.email}&tutor_email=${user?.email}`, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user }), 
+      })
+      const data = await response.json()
+      setStudentFiles(data.data)
+    } 
+    catch (error) {
+      console.error("Error fetching comments:", error.message)
+    } 
+  }
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
-        console.log(user)
       } else {
         router.push("/login")
       }
@@ -36,24 +86,17 @@ export default function Student_id() {
   }, [])
 
   useEffect(() => {
-    fetch("/api/students/get_student?student_id=" + student_id)
-        .then(response => response.json())
-        .then(data => setStudent(data.data))
-  }, [user])
+    if (student_id) getStudent()
+  }, [student_id])
 
   useEffect(() => {
-    fetch("/api/students/get_student_classes?student_email=" + student?.email)
-        .then(response => response.json())
-        .then(data => setClasses(data.data))
-
-      fetch("/api/students/get_student_files?student_email=" + student?.email + "&tutor_email=" + user?.email)
-        .then(response => response.json())
-        .then(data => setStudentFiles(data.data))
-  }, [student])
+    getStudentClasses()
+    if (user) getStudentFiles()
+  }, [student, user])
   return (
     <>
       <Head>
-          <title>Cornelio | {student?.username}</title>
+          <title>Alba | {student?.username}</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Cornelio Tutors" />
           <link rel="icon" href="/icon.png" />
@@ -62,7 +105,7 @@ export default function Student_id() {
           <meta property="og:description" content="Your meta description goes here" />
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
-      <main>
+      <main className="mb-12 md:mb-24">
         <Header user={user} />
         <div className="mx-6 md:mx-10 flex items-center gap-6">
           <Image className="rounded-full" alt="Student's profile picture" height={70} width={70} src={student?.profile_url} />

@@ -83,7 +83,7 @@ export default function Signup() {
                             <div className="flex h-screen items-center text-center flex-col space-y-3 justify-center w-full">
                                 <Image className="absolute mb-72" alt="alba's logo" width={150} height={150} src="https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/logo.png?alt=media&token=36fa1da0-40a9-4e2e-a6f7-9f3fc5d77510&_gl=1*1x34fcy*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5ODYwMjYxMS4xOTUuMS4xNjk4NjA0OTMyLjQ3LjAuMA.." />
                                 <p className="font-bold text-2xl">Crea tu cuenta</p>
-                                <div className="border-t border-[#222222] w-full flex justify-center"/>
+                                <div className="border-t border-[#dddddd] w-full flex justify-center"/>
                                 <div className="flex justify-center w-full">
                                     <button onClick={handleGoogleSignIn} className={`shadow-[0px_0px_15px_rgb(0,0,0,0.02)] gap-4 w-full md:px-16 py-2 bg-[#f7f7f7] hover:bg-[#dddddd] border border-[#dddddd] flex items-center justify-center rounded-lg text-[#222222] font-bold duration-200`}>
                                         <FcGoogle size={20}/>
