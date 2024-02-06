@@ -14,22 +14,11 @@ export default function Login() {
 
   const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider)
-      const url = "/api/auth/signup?profile_url=" + auth.currentUser.photoURL + "&email=" + auth.currentUser.email + "&username=" + auth.currentUser.displayName
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-      })
-      const data = await response.json()
-    
-      if (data.tutorCreated == true) {
+        const result = await signInWithPopup(auth, googleProvider)
         router.push("/")
-      }
     } catch (error) {
         console.error("Google login error:", error);
-      }    
+    }    
   }
   return (
     <>
@@ -58,7 +47,7 @@ export default function Login() {
                 <p>Entrar con Google</p>
               </button>
             </div>
-            <p className="pt-2 text-[#222222]">¿Aún no tienes una cuenta? <a href="/signup" className="text-blue-400 underline">Regístrate</a></p>
+            <p className="pt-2">¿No tienes una cuante? <a href="/signup" className="text-blue-400 underline">Crea tu cuenta</a></p>
           </div>
         </div>
       </main>

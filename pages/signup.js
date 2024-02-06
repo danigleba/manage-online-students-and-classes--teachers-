@@ -25,38 +25,32 @@ export default function Signup() {
     const handleGoogleSignIn = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider)
-            const url = "/api/auth/signup?profile_url=" + auth.currentUser.photoURL + "&email=" + auth.currentUser.email + "&username=" + auth.currentUser.displayName
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            const data = await response.json()
-            
-            if (data.tutorCreated == true) {
-                setAuthState("Extra_info")
-            }
+                .then(
+                    setAuthState("FB signup")
+                )
         } catch (error) {
             console.error("Google login error:", error);
         }    
     }
 
-    const sumitTutorsInfo = async () => {
+
+    const signup = async () => {
         if (phoneNumber != ""  && price1 > 0 && price10 > 0 && price20 > 0 && vc_platform != "") {
             setErrorMessage("")
-            const url = "/api/auth/set_tutor_info?phoneNumber=" + phoneNumber + "&price1=" + price1 + "&price10=" + price10 + "&price20=" + price20 + "&vc_platform=" + vc_platform + "&email=" + auth.currentUser.email
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            const data = await response.json()
-            
-            if (data.tutorUpdated  == true) {
-                router.push("/")
+            try {
+                const response = await fetch("/api/auth/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ phoneNumber: phoneNumber, price1: price1,  price10: price10, price20: price20, vc_platform: vc_platform, user: auth.currentUser})
+                })
+                const data = await response.json()
+                if (data.tutorCreated == true) router.push("/")
+            } catch (error) {
+                console.log(error)
             }
+            
         } else {
             setErrorMessage("Llena todos los campos para continuar.")
         }
@@ -123,7 +117,7 @@ export default function Signup() {
                                         <input onChange={(e) => setPrice20(e.target.value)} type="number" placeholder="350 €" className="font-normal bg-[#f7f7f7] border border-[#dddddd] text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                                     </div>   
                                     <div>
-                                        <button onClick={sumitTutorsInfo} className="mt-4 w-full bg-[#eb4c60] hover:bg-[#d63c4f] py-2 rounded-md text-white">Enviar</button>
+                                        <button onClick={signup} className="mt-4 w-full bg-[#eb4c60] hover:bg-[#d63c4f] py-2 rounded-md text-white">Enviar</button>
                                         <p className="text-center text-sm pt-2 font-light">{errorMessage}</p>
                                     </div>
                                 </div>

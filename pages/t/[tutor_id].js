@@ -15,6 +15,7 @@ export default function Student_id() {
   const router = useRouter()  
   const { tutor_id } = router.query
   const [tutor, setTutor] = useState({})
+  const [tutorEmail, setTutorEmail] = useState()
   const [user, setUser] = useState()
   const [userData, setUserData] = useState({})
 
@@ -69,6 +70,16 @@ export default function Student_id() {
   }, [user])
 
   useEffect(() => {
+    if (userData) {
+        console.log(userData?.paid_classes)
+    }
+  }, [userData])
+
+  useEffect(() => {
+    if (tutor) setTutorEmail(tutor?.email)
+  }, [tutor])
+
+  useEffect(() => {
     if (tutor_id) getTutor()
   }, [tutor_id])
   return (
@@ -85,6 +96,9 @@ export default function Student_id() {
       </Head>
       <main className="mb-12 md:mb-24">
         <TutorPage tutor={tutor} />
+        {userData && (
+            <p>{userData?.paid_classes?.tutorEmail}</p>
+        )}
       </main>
     </>
   )

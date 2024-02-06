@@ -8,8 +8,8 @@ import AddStudentButton from "./AddStudentsButtons"
 export default function Headers(props) {
     const router = useRouter()
 
-    const checkUserRegistration = async () => {
-        const url = "/api/auth/check_tutor_info?email=" + auth.currentUser.email
+    const checkUserInFirestore = async () => {
+        const url = "/api/auth/check_tutor_info?uid=" + auth.currentUser.uid
         const response = await fetch(url, {
             method: "POST",
             headers: {
@@ -18,7 +18,7 @@ export default function Headers(props) {
         })
         const data = await response.json()
         
-        if (data.tutorRegistered == false) {
+        if (data.userExists == false) {
            router.push("/signup")
         }
     }
@@ -28,7 +28,7 @@ export default function Headers(props) {
           if (!user) {
             router.push("/login")
           } else {
-            checkUserRegistration()
+            checkUserInFirestore()
           }
         })    
     }, [])
