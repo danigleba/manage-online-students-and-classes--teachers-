@@ -16,6 +16,7 @@ export default function Student_id() {
   const { tutor_id } = router.query
   const [tutor, setTutor] = useState({})
   const [tutorEmail, setTutorEmail] = useState()
+  const [availableClasses, setAvailableClasses] = useState(0)
   const [user, setUser] = useState()
   const [userData, setUserData] = useState({})
 
@@ -45,7 +46,6 @@ export default function Student_id() {
           body: JSON.stringify({ user }), 
         })
         const data = await response.json()
-        console.log(data.data)
         setUserData(data.data)
       } 
       catch (error) {
@@ -53,31 +53,41 @@ export default function Student_id() {
       } 
   }
 
+  const findAvailableClasses = async () => {
+    for (let i = 0; i < userData?.tutors?.length; i++) {
+        if (userData?.tutors[i]?.uid == tutor_id) {
+          setAvailableClasses(userData?.tutors[i].availableClasses)
+          return
+        }
+    }
+    return
+  }
+  
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
       } else {
-        //Open login popup and reload page
+        //Open login popup and reload page after login/signup
       }
     })    
   }, [])
 
   useEffect(() => {
-    if (user) {
-        getUser()
-    }
+    if (user) getUser()
   }, [user])
 
   useEffect(() => {
-    if (userData) {
-        console.log(userData?.paid_classes)
-    }
-  }, [userData])
+    if (userData && tutor_id) findAvailableClasses()
+  }, [userData, tutor_id])
 
   useEffect(() => {
     if (tutor) setTutorEmail(tutor?.email)
   }, [tutor])
+
+  useEffect(() => {
+    console.log(availableClasses)
+  }, [availableClasses])
 
   useEffect(() => {
     if (tutor_id) getTutor()
@@ -85,7 +95,7 @@ export default function Student_id() {
   return (
     <>
       <Head>
-          <title>Alba | {tutor?.username}</title>
+          <title>Alba | Reserva con {tutor?.username}</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Cornelio Tutors" />
           <link rel="icon" href="/icon.png" />
@@ -95,10 +105,7 @@ export default function Student_id() {
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
       <main className="mb-12 md:mb-24">
-        <TutorPage tutor={tutor} />
-        {userData && (
-            <p>{userData?.paid_classes?.tutorEmail}</p>
-        )}
+        <TutorPage tutor={tutor} availableClasses={availableClasses} user={user} />
       </main>
     </>
   )

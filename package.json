@@ -10,12 +10,13 @@
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^2.3.0",
-    "@stripe/stripe-js": "^2.1.6",
+    "@stripe/stripe-js": "^2.4.0",
     "firebase": "^10.4.0",
-    "next": "latest",
+    "next": "^14.1.0",
     "react": "latest",
     "react-dom": "latest",
-    "react-icons": "^4.11.0"
+    "react-icons": "^4.11.0",
+    "stripe": "^14.15.0"
   },
   "devDependencies": {
     "autoprefixer": "latest",
