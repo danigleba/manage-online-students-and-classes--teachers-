@@ -3,30 +3,30 @@ import { useRouter } from "next/router"
 import Image from "next/image"
 import Cookies from "js-cookie"
 import AddStudentButton from "./AddStudentsButtons"
-import { BiLogoZoom } from "react-icons/bi"
 
 export default function Headers(props) {
     const router = useRouter()
     const userCookie = Cookies.get("userCookie")
     const [userData, setUserData] = useState()
     const [phoneNumber, setPhoneNumber] = useState()
+    //The prices can be an array
     const [email, setEmail] = useState()
     const [price1, setPrice1] = useState()
     const [price10, setPrice10] = useState()
     const [price20, setPrice20] = useState()
-    const [vc_platform, setVCPlatform] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
     const [tutorFormIsOpen, setTutorFormIsOpen] = useState(false)
     
     const handleAuth = async () => {
         const params = new URLSearchParams(window.location.hash.substring(1))
         const accessToken = params.get("access_token") 
-        setUserData(fetchUserData(Cookies.get("accesCookie")))
+        const userData = await fetchUserData(accessToken ? accessToken : Cookies.get("accesCookie"))
+        setUserData(userData)
         if (!userCookie) {
             if (accessToken) {
                 Cookies.set("accesCookie", accessToken, { expires: 30 })
-                Cookies.set("userCookie", fetchUserData(accessToken)?.id, { expires: 30 })
-                checkUserInFirestore(fetchUserData(accessToken))
+                Cookies.set("userCookie", userData.id, { expires: 30 })
+                checkUserInFirestore(userData.id)
             } else router.push("/signup")
         } else checkUserInFirestore(userCookie)
     }
@@ -37,17 +37,12 @@ export default function Headers(props) {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
-            });
-            if (response.ok) {
-                const userData = await response.json();
-                setUserData(userData)
-                return userData;
-            } else {
-                throw new Error("Failed to fetch user data");
-            }
+            })
+            const userData = await response.json()
+            setUserData(userData)
+            return userData
         } catch (error) {
-            console.error("Error fetching user data:", error);
-            return null;
+            console.error("Error fetching user data:", error)
         }
     }
 
@@ -62,7 +57,7 @@ export default function Headers(props) {
         const data = await response.json()
         if (data.userExists == false) {
             setTutorFormIsOpen(true)
-        } else console.log("User exists in FB")
+        } 
     }
 
     const uploadUserToFirebase = async () => {
@@ -76,13 +71,12 @@ export default function Headers(props) {
                 body: JSON.stringify({ user: userData, price1: price1, price10: price10, price20: price20, phoneNumber: phoneNumber, email: email })
             })
             const data = await response.json() 
-            console.log(data)
         } else setErrorMessage("Llena todos los campos para continuar.") 
     }
     
     useEffect(() => {
         handleAuth()
-    }, [])
+    }, [Cookies])
     return (
         <main className="pb-28 md:pb-32 w-full">
             <div className="fixed top-0 px-6 md:px-10 py-3 flex justify-between items-center bg-white w-screen border-b boder-[#dddddd]">
