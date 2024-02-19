@@ -16,20 +16,23 @@ export default function Index() {
   const router = useRouter()  
   const [user, setUser] = useState({})
 
+  
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    /*onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
       } else {
         router.push("/login")
       }
-    })    
+    })    */
   }, [])
   return (
     <>
       <Head>
         <title>Alba | Clases</title>
         <meta name="description" content="Your meta description goes here" />
+        <meta name="google-signin-client_id" content="605098004143-qhd7j3t7fb1p72sllu320fgg9b21f6bj.apps.googleusercontent.com.apps.googleusercontent.com" />
         <meta name="author" content="Cornelio Tutors" />
         <link rel="icon" href="/icon.png" />
         <link rel="canonical" href="https://tutors.getcornelio.com/"/>

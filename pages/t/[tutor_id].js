@@ -56,7 +56,7 @@ export default function Student_id() {
   const findAvailableClasses = async () => {
     for (let i = 0; i < userData?.tutors?.length; i++) {
         if (userData?.tutors[i]?.uid == tutor_id) {
-          setAvailableClasses(userData?.tutors[i].availableClasses)
+          setAvailableClasses(userData?.tutors[i].classCredit)
           return
         }
     }
@@ -86,10 +86,6 @@ export default function Student_id() {
   }, [tutor])
 
   useEffect(() => {
-    console.log(availableClasses)
-  }, [availableClasses])
-
-  useEffect(() => {
     if (tutor_id) getTutor()
   }, [tutor_id])
   return (
@@ -105,7 +101,7 @@ export default function Student_id() {
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
       <main className="mb-12 md:mb-24">
-        <TutorPage tutor={tutor} availableClasses={availableClasses} user={user} />
+        <TutorPage tutor={tutor} availableClasses={availableClasses} user={user} userData={userData} />
       </main>
     </>
   )

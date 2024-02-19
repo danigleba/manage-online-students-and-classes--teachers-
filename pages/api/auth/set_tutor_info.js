@@ -1,32 +1,28 @@
 import { db } from "@/utils/firebase"
-import { collection, updateDoc, query, where, getDocs } from "firebase/firestore"
+import { doc, setDoc } from "firebase/firestore"
 
-export default async function (req, res) {
-    const { price1, price10, price20, vc_platform, email, phoneNumber } = req.query 
-
-    const tutorRef = collection(db, "tutors")
-    const tutorSnap = query(tutorRef, where("email", "==", email))
-    const queryTutorSnap = await getDocs(tutorSnap)
-    
+export default async function handler(req, res) {
+    const { user, price1, price10, price20, phoneNumber, email } = req.body
     try {
-        const updatePromises = []
-        queryTutorSnap.forEach((doc) => {
-            const updatePromise = updateDoc(doc.ref, {
-                phone_number: phoneNumber,
-                prices: {
-                    "one_class": parseInt(price1),
-                    "ten_classes": parseInt(price10),
-                    "twenty_classes": parseInt(price20)
-                },
-                vc_platform: vc_platform,
-                registered: true
-            })
-            updatePromises.push(updatePromise)
+        const tutorRef = doc(db, "tutors", `${user.id}`)
+        const newTutor = await setDoc(tutorRef, {
+            email: email,
+            id: user.id,
+            profile_url: user.picture,
+            full_name: user.name, 
+            first_name: user.given_name, 
+            last_name: user.family_name, 
+            locale: user.locale,
+            prices: {
+                one_class: price1,
+                ten_classes: price10,
+                twenty_classes: price20,
+            },
+            phone_number: phoneNumber,
+            students: [],
         })
-        await Promise.all(updatePromises)
-        res.status(200).json({ tutorUpdated: true })
+        res.status(201).json({ newTutor: newTutor})
     } catch (error) {
-        console.error(error)
-        res.status(500).json({ message: "Server error!" })
+        res.status(500).json({ error: "Internal Server Error" })
     }
-}
+} 

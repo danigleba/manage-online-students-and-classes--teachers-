@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import LoadingAnimation from "@/components/LoadingAnimation"
 
-export default function CheckoutForm({ clientSecret, user, tutor, selectedPrice}) {
+export default function CheckoutForm({ clientSecret, user, userData,  tutor, selectedPrice, numberOfClassesChosen }) {
     const router = useRouter()
     const stripe = useStripe()
     const elements = useElements()
@@ -36,13 +36,13 @@ export default function CheckoutForm({ clientSecret, user, tutor, selectedPrice}
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ user: user, tutor: tutor })    
+            body: JSON.stringify({ user: user, userData: userData, tutor: tutor, numberOfClassesChosen: numberOfClassesChosen })    
         })
         const data = await response.json()
     }
     return (
         <form className="w-full md:w-1/2" id="payment-form" onSubmit={handleSubmit}>
-            <h2 className="text-center text-2xl md:text-3xl pb-6">10 clases con {tutor.username}</h2>
+            <h2 className="text-center text-2xl md:text-3xl pb-6">{numberOfClassesChosen} clases con {tutor.username}</h2>
             <PaymentElement id="payment-element" options={paymentElementOptions}/>
             <button id="submit" disabled={isLoading || !stripe || !elements} className="w-full text-base mt-8 hover:scale-100 bg-[#222222] hover:bg-black text-white rounded-md py-2">
                 <span id="button-text">

@@ -14,6 +14,7 @@ export default function Login() {
 
   const handleGoogleSignIn = async () => {
     try {
+        googleProvider.addScope("calendar")
         const result = await signInWithPopup(auth, googleProvider)
         router.push("/")
     } catch (error) {

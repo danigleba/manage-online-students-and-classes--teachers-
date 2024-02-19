@@ -34,7 +34,7 @@ export default function Students({ user }) {
         <AddStudentButton user={user}/>
       </div>
       <div className="flex w-screen items-center">
-        {students.length > 0 ? (
+        {students?.length > 0 ? (
           <div className="px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
             {students.map((item) => (
               <a href={`/s/${item.id}`} key={item.id}>
