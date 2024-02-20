@@ -26,9 +26,9 @@ export default function Headers(props) {
             if (accessToken) {
                 Cookies.set("accesCookie", accessToken, { expires: 30 })
                 Cookies.set("userCookie", userData.id, { expires: 30 })
-                checkUserInFirestore(userData.id)
+                checkUserInFirestore(userData)
             } else router.push("/signup")
-        } else checkUserInFirestore(userCookie)
+        } else checkUserInFirestore(userData)
     }
     
     const fetchUserData = async (accessToken) => {
@@ -46,8 +46,8 @@ export default function Headers(props) {
         }
     }
 
-    const checkUserInFirestore = async (id) => {
-        const url = "/api/auth/check_tutor_info?uid=" + id
+    const checkUserInFirestore = async (user) => {
+        const url = "/api/auth/check_tutor_info?uid=" + user?.id
         const response = await fetch(url, {
             method: "POST",
             headers: {
@@ -57,7 +57,7 @@ export default function Headers(props) {
         const data = await response.json()
         if (data.userExists == false) {
             setTutorFormIsOpen(true)
-        } 
+        } else getUserFromFirebase(user)
     }
 
     const uploadUserToFirebase = async () => {
@@ -71,9 +71,23 @@ export default function Headers(props) {
                 body: JSON.stringify({ user: userData, price1: price1, price10: price10, price20: price20, phoneNumber: phoneNumber, email: email })
             })
             const data = await response.json() 
+            if (data.newTutorAdded == true) router.reload()
         } else setErrorMessage("Llena todos los campos para continuar.") 
     }
     
+    const getUserFromFirebase = async (user) => {
+        const response = await fetch("/api/firebase/getTutor", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user: user })
+        })
+        const data = await response.json() 
+        console.log(data)
+        setUserData(data.user)
+    }
+
     useEffect(() => {
         handleAuth()
     }, [Cookies])

@@ -8,10 +8,10 @@ export default async function handler(req, res) {
         const newTutor = await setDoc(tutorRef, {
             email: email,
             id: user.id,
-            profile_url: user.picture,
-            full_name: user.name, 
-            first_name: user.given_name, 
-            last_name: user.family_name, 
+            picture: user.picture,
+            name: user.name, 
+            given_name: user.given_name, 
+            family_name: user.family_name, 
             locale: user.locale,
             prices: {
                 one_class: price1,
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
             phone_number: phoneNumber,
             students: [],
         })
-        res.status(201).json({ newTutor: newTutor})
+        res.status(201).json({ newTutorAdded: true})
     } catch (error) {
         res.status(500).json({ error: "Internal Server Error" })
     }
