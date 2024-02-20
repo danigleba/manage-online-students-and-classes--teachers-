@@ -49,7 +49,7 @@ export default function TutorPage({ tutor, availableClasses, user, userData }) {
                 <Image alt="Cornelio's logo" height={100} width={100} src="https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/logo.png?alt=media&token=36fa1da0-40a9-4e2e-a6f7-9f3fc5d77510&_gl=1*1x34fcy*_ga*Njg1NzExNjYxLjE2OTA2MzY3Mjk.*_ga_CW55HF8NVT*MTY5ODYwMjYxMS4xOTUuMS4xNjk4NjA0OTMyLjQ3LjAuMA.." />
                 <div className="flex items-center gap-4 text-[#222222]">
                     <div>
-                        <p className="hidden md:flex font-semibold text-lg">{user?.displayName}</p>
+                        <p className="hidden md:flex font-semibold text-lg">{user?.name}</p>
                     </div>
                     <Image className='rounded-full' alt="Tutor's profile picture" height={45} width={45} src={user?.photoURL}/>
                 </div>
@@ -57,15 +57,14 @@ export default function TutorPage({ tutor, availableClasses, user, userData }) {
             {/*Tutor profile*/}
             <div className="flex flex-col md:flex-row w-full items-center justify-between px-8 md:px-20 mt-12">
                 <div className="flex items-center justify-center gap-6">
-                    <Image className="rounded-full" alt="Student's profile picture" height={70} width={70} src={tutor?.profile_url} />
+                    <Image className="rounded-full" alt="Student's profile picture" height={70} width={70} src={tutor?.picture} />
                     <div>
-                        <div className="flex gap-5 pb-2">
-                            <p className="font-bold text-xl">{tutor?.username}</p>   
+                        <div className="flex flex-col gap-2 pb-2">
+                            <p className="font-bold text-xl">{tutor?.name}</p>   
                                 <div className="bg-[#f4f4f4f4] border border-[#dddddd] py-1 px-4 font-medium w-max rounded-md">
                                     {availableClasses} clases compradas
                                 </div>
                         </div>
-                        <p className="font-light text-lg">Progresor de español con +20 años de experienceia</p>
                     </div>
                 </div>
                 <div className="w-full pt-12 md:pt-0 md:w-1/3">
@@ -84,7 +83,7 @@ export default function TutorPage({ tutor, availableClasses, user, userData }) {
                 <>
                 {!clientSecret && (
                     <div className="w-full">
-                    <h2 className="text-center text-2xl md:text-3xl md:pb-3">Compra clases con {tutor?.username?.substring(0, tutor.username.indexOf(" "))}</h2>
+                    <h2 className="text-center text-2xl md:text-3xl md:pb-3">Compra clases con {tutor?.given_name}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full pt-4 text-center font-bold text-lg rounded">
                         <div className="checkout-card md:mt-11" onClick={() => createPaymentIntent(tutor?.prices?.one_class * 100, 1)} type="submit">
                             <p className="bg-[#f4f4f4] rounded-md py-1">1 clase</p>

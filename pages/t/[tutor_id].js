@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { useState, useEffect} from "react"
 import { auth } from "@/utils/firebase"
 import { onAuthStateChanged } from "firebase/auth"
+import Cookies from "js-cookie"
 import Header from "@/components/Header"
 import BottomNavBar from "@/components/BottomNavBar"
 import TutorPage from "@/components/TutorPage"
@@ -43,7 +44,7 @@ export default function Student_id() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ user }), 
+          body: JSON.stringify({ userId: Cookies.get("userCookie") }), 
         })
         const data = await response.json()
         setUserData(data.data)
